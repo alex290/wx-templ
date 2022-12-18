@@ -1,0 +1,4 @@
+#include "resicon.h" 
+#include <wx/msw/wx.rc>
+
+icon_file ICON "../_dev/icon.ico"
