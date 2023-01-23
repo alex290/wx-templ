@@ -10,6 +10,7 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 IF (WIN32)
     # Укажите путь до папки wxWidgets
     set(wxWidgets_ROOT_DIR "c:/wxwidgets/3.2.1")
+    # set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2.1/lib/gcc_x64_lib")
     set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2.1/lib/gcc_x64_dll")
 ENDIF()
 if(MINGW)
@@ -34,7 +35,13 @@ file(GLOB project
 add_executable(${PROJECT_NAME} ${project})
 
 if(wxWidgets_FOUND)
+
+    # Динамическая  сборка
     target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
+
+    # Статическая  сборка
+    # target_link_libraries(${PROJECT_NAME} "c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxmsw32u_core.a" "c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxbase32u.a""c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxpng.a""c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxzlib.a" ${wxWidgets_LIBRARIES})
+
     target_include_directories(${PROJECT_NAME} PRIVATE ${wxWidgets_INCLUDE_DIRS})
     message(STATUS "Found wxWidgets ${wxWidgets_VERSION_STRING}")
 else()
