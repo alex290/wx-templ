@@ -40,7 +40,12 @@ if(wxWidgets_FOUND)
     target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
 
     # Статическая  сборка
-    # target_link_libraries(${PROJECT_NAME} "c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxmsw32u_core.a" "c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxbase32u.a""c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxpng.a""c:/wxwidgets/3.2.1/lib/gcc_x64_lib/libwxzlib.a" ${wxWidgets_LIBRARIES})
+    # target_link_libraries(${PROJECT_NAME} 
+    #     "${wxWidgets_LIB_DIR}/libwxmsw32u_core.a" 
+    #     "${wxWidgets_LIB_DIR}/libwxbase32u.a" 
+    #     "${wxWidgets_LIB_DIR}/libwxpng.a" 
+    #     "${wxWidgets_LIB_DIR}/libwxzlib.a" 
+    #     ${wxWidgets_LIBRARIES})
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${wxWidgets_INCLUDE_DIRS})
     message(STATUS "Found wxWidgets ${wxWidgets_VERSION_STRING}")
