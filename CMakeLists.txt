@@ -5,6 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(default_build_type "Release")
+    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+    # Set the possible values of build type for cmake-gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release")
+endif()
 
 
 IF (WIN32)
@@ -28,11 +35,17 @@ file(GLOB project
     src/res/*
 )
 
-# Без консоли 
-# add_executable(${PROJECT_NAME} WIN32 ${project})
-
-# С консолью
-add_executable(${PROJECT_NAME} ${project})
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    # С консолью
+    add_executable(${PROJECT_NAME} ${project})
+    message("-- Bullet: Debug build")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    # Без консоли 
+    add_executable(${PROJECT_NAME} WIN32 ${project})
+    message("-- Bullet: Release build")
+else()
+    message("-- Bullet: Unknown build type") # <---- This is the result, why?
+endif()
 
 if(wxWidgets_FOUND)
 
@@ -51,12 +64,4 @@ if(wxWidgets_FOUND)
     message(STATUS "Found wxWidgets ${wxWidgets_VERSION_STRING}")
 else()
     message(STATUS "wxWidgets Not Found")
-endif()
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message("-- Bullet: Debug build")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    message("-- Bullet: Release build")
-else()
-    message("-- Bullet: Unknown build type") # <---- This is the result, why?
 endif()
