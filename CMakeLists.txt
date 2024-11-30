@@ -16,9 +16,9 @@ endif()
 
 IF (WIN32)
     # Укажите путь до папки wxWidgets
-    set(wxWidgets_ROOT_DIR "c:/wxwidgets/3.2.2")
-    # set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2.2/lib/gcc_x64_lib")
-    set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2.2/lib/gcc_x64_dll")
+    set(wxWidgets_ROOT_DIR "c:/wxwidgets/3.2")
+    # set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2/lib/gcc_x64_lib")
+    set(wxWidgets_LIB_DIR "c:/wxwidgets/3.2/lib/gcc_x64_dll")
 ENDIF()
 if(MINGW)
     link_libraries(ws2_32 wsock32)
